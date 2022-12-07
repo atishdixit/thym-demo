@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div>
+    <h2>User Details Page(Expression)</h2>
+    <p> ID: <strong th:text="${user.id}"></strong></p>
+    <p> Name: <strong th:text="${user.name}"></strong></p>
+    <p> Email: <strong th:text="${user.email}"></strong></p>
+    <p> Statuc: <strong th:text="${user.gender}"></strong></p>
+    <p> Statuc: <strong th:text="${user.role}"></strong></p>
+    <p> Statuc: <strong th:text="${user.isActive}"></strong></p>
+</div>
+<hr>
+<div th:object="${user1}"}>
+    <h2>User Details Page(Selection)</h2>
+    <p> ID: <strong th:text="*{id}"></strong></p>
+    <p> Name: <strong th:text="*{name}"></strong></p>
+    <p> Email: <strong th:text="*{email}"></strong></p>
+    <p> Statuc: <strong th:text="*{gender}"></strong></p>
+    <p> Statuc: <strong th:text="*{role}"></strong></p>
+    <p> Statuc: <strong th:text="*{isActive}"></strong></p>
+</div>
+
+<hr>
+<div>
+    <h2>Message Expression</h2>
+    <p> Message 2: <h2 th:text="#{name.message}"></h2></p>
+    <p> Message 3: <h2 th:text="#{email.name.message}"></h2></p>
+  </div>
+
+
+<hr>
+<div>
+    <h2>User List</h2>
+    <TABLE border="1">
+        <thead>
+            <tr>
+                <td>SNO</td>
+                <td>INDEX</td>
+                <td>EVEN</td>
+                <td>ODD</td>
+                <td>FIRST</td>
+                <td>LAST</td>
+                <td>ID</td>
+                <td>NAME</td>
+                <td>EMAIL</td>
+                <td>STATUS</td>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user, userStatus: ${users}">
+            <td th:text="${userStatus.count}"></td>
+            <td th:text="${userStatus.index}"></td>
+            <td th:text="${userStatus.even}"></td>
+            <td th:text="${userStatus.odd}"></td>
+            <td th:text="${userStatus.first}"></td>
+            <td th:text="${userStatus.last}"></td>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.isActive}"></td>
+        </tr>
+        </tbody>
+    </TABLE>
+</div>
+
+
+<hr>
+<div>
+    <h2>User List (ROLES)</h2>
+    <TABLE border="1">
+        <thead>
+        <tr>
+            <td>NAME</td>
+            <td>EMAIL</td>
+            <td>STATUS</td>
+            <td>ACTION</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}">
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.isActive}"></td>
+            <td >
+                <a th:href="@{/update}" th:if="${user.role}=='ADMIN'">Update</a>
+                <a th:href="@{/update}" th:if="${user.role}=='ADMIN'">Delete</a>
+                <a th:href="@{/update}" th:unless="${user.role}=='ADMIN'">view</a>
+            </td>
+        </tr>
+        </tbody>
+    </TABLE>
+</div>
+
+<hr>
+<div>
+    <h2>Link Expression</h2>
+    <a th:href="@{/get-request}">Click here</a>
+</div>
+
+</body>
+</html>
